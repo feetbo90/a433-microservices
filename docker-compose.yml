@@ -1,0 +1,36 @@
+# Versi format konfigurasi Docker Compose yang digunakan
+version: '3.7'
+
+services:
+  # Layanan yang menggunakan image "mongo:3" (MongoDB versi 3).
+  item-db:
+    image: mongo:3
+    # Menghubungkan volume "app-db" dengan direktori "/data/db" di kontainer MongoDB
+    volumes:
+      - app-db:/data/db
+    # Membuka port 27017 di host dan mengarahkannya ke port 27017 di kontainer MongoDB
+    ports:
+      - "27017:27017"
+    # restart sewaktu gagal build
+    restart: always
+  item-app:
+    image: mhdiqbalpradipta/item-app:v1
+    # Mengatur direktori kerja kontainer ke "/app".
+    working_dir: /app
+    # Membuka port 80 di host dan mengarahkannya ke port 8080 di kontainer "item-app"
+    ports:
+      - "80:8080"
+    depends_on:
+    # Menunjukkan bahwa kontainer "item-db" harus dijalankan terlebih dahulu.
+      - item-db
+    # Mengatur variabel lingkungan dalam kontainer
+    environment:
+      NODE_ENV: production
+      DB_HOST: item-db
+    # restart sewaktu gagal build
+    restart: always
+    
+# Mendefinisikan volume yang dapat digunakan oleh kontainer.
+volumes:
+  app-db:
+
