@@ -1,0 +1,1 @@
+https://hub.docker.com/layers/mhdiqbalpradipta/item-app/v1/images/sha256-e748f7f0a61e51ccc4f26ebe3c84c1102a28d95247122a3268f53a369d65b259?context=repo
