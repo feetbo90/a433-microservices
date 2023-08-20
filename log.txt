@@ -1,0 +1,50 @@
+cb54b29bafbe
+483a8bc460a9
+0850fead9327
+d005dedc35dc
+97801f839490
+ca0ea1ee3cfd
+dbfceb93c69b
+1c7d8c51823b
+4873874c08ef
+a8a176a5d5d6
+5185b96f0bec
+9dbc24674f25
+30a990d825b0
+317a302c7480
+dbfa8d819af4
+2f21415cb85f
+8c2c38aa676e
+99f89471f470
+[+] Building 75.3s (9/9) FINISHED                                                                             
+ => [internal] load build definition from Dockerfile                                                     0.1s
+ => => transferring dockerfile: 37B                                                                      0.0s
+ => [internal] load .dockerignore                                                                        0.0s
+ => => transferring context: 34B                                                                         0.0s
+ => [internal] load metadata for docker.io/library/node:14-alpine                                        3.6s
+ => [1/4] FROM docker.io/library/node:14-alpine@sha256:434215b487a329c9e867202ff89e704d3a75e554822e07f3  0.0s
+ => [internal] load build context                                                                        0.9s
+ => => transferring context: 693.40kB                                                                    0.8s
+ => CACHED [2/4] WORKDIR /app                                                                            0.0s
+ => [3/4] COPY . .                                                                                       5.3s
+ => [4/4] RUN npm install --production --unsafe-perm && npm run build                                   63.7s
+ => exporting to image                                                                                   1.6s 
+ => => exporting layers                                                                                  1.6s 
+ => => writing image sha256:6e396a724a98967a7b92aec8aafdea3e1d9299a38bfe5571759c712cf683889c             0.0s 
+ => => naming to docker.io/library/item-app:v1                                                           0.0s 
+                                                                                                              
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them          
+Login Succeeded
+
+Logging in with your password grants your terminal complete access to your account. 
+For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
+The push refers to repository [docker.io/mhdiqbalpradipta/item-app]
+f2ca23d158eb: Pushed 
+9f57a1345093: Pushed 
+ccbdba6654b3: Layer already exists 
+31f710dc178f: Layer already exists 
+a599bf3e59b8: Layer already exists 
+e67e8085abae: Layer already exists 
+f1417ff83b31: Layer already exists 
+v1: digest: sha256:e748f7f0a61e51ccc4f26ebe3c84c1102a28d95247122a3268f53a369d65b259 size: 1788
+Removing login credentials for https://index.docker.io/v1/
