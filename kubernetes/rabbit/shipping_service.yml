@@ -1,4 +1,3 @@
-# Membuat object Service dengan Nama "shipping" beserta identitas label
 apiVersion: v1
 kind: Service
 metadata:
@@ -6,10 +5,7 @@ metadata:
   labels:
     app: shipping
 
-# Bagian konfigruasi untuk spec Service
 spec:
-  # Mencari deployments yang menggunakan "app: shipping" sebagai labelnya
-  # Mengekspos port 3001 dengan tipe NodePort 
   selector:
     app: shipping
   ports:
@@ -17,7 +13,6 @@ spec:
     targetPort: 3001
   type: NodePort
 ---
-# Membuat object Deployment dengan Nama "shipping" beserta identitas label
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,30 +20,23 @@ metadata:
   labels:
     app: shipping
 
-# Bagian konfigruasi untuk spesifikasi Deployment
 spec:
-  # Sabagai penghubung selector yang terdapat di object Service
-  # Menggunakan penghubung selector "app: shipping"
   selector:
     matchLabels:
       app: shipping
   
-  # Membuat replikasi pods sesuai dengan nilai tercantum
   replicas: 1
 
-  # Merupakan konfigurasi pod mulai dari pemberian label dan spesifikasi container yang akan digunakan
   template:
     metadata:
       labels:
         app: shipping
-    # Spesifikasi container menggunakan image yang telah di publihs di Github Package dan mengexpose port 3001        
     spec:
       containers:
         - name: shipping
           image: mhdiqbalpradipta/shipping_service:latest
           ports:
           - containerPort: 3001
-          # Mendeklarasikan environment variable PORT dan AMQP_URL sesuai dengan valuenya masingg masing
           env:
           - name: PORT
             value: "3001"
