@@ -1,0 +1,56 @@
+# Membuat object Service dengan Nama "order" beserta identitas label
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  labels:
+    app: order
+
+# Bagian konfigruasi untuk spec Service
+spec:
+  # Mencari deployments yang menggunakan "app: order" sebagai labelnya
+  # Mengekspos port 3000 dengan tipe NodePort 
+  selector:
+    app: order
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: NodePort
+---
+# Membuat object Deployment dengan Nama "order" beserta identitas label
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  labels:
+    app: order
+
+# Bagian konfigruasi untuk spesifikasi Deployment
+spec:
+  # Sabagai penghubung selector yang terdapat di object Service
+  # Menggunakan penghubung selector "app: order"
+  selector:
+    matchLabels:
+      app: order
+
+  # Membuat replikasi pods sesuai dengan nilai tercantum
+  replicas: 1
+
+  # Merupakan konfigurasi pod mulai dari pemberian label dan spesifikasi container yang akan digunakan
+  template:
+    metadata:
+      labels:
+        app: order
+    # Spesifikasi container menggunakan image yang telah di publihs di Github Package dan mengexpose port 3000
+    spec:
+      containers:
+        - name: order
+          image: mhdiqbalpradipta/order_service:latest
+          ports:
+          - containerPort: 3000
+          # Mendeklarasikan environment variable PORT dan AMQP_URL sesuai dengan valuenya masingg masing
+          env:
+          - name: PORT
+            value: "3000"
+          - name: AMQP_URL
+            value: "amqp://guest:guest@192.168.100.13:5672"
