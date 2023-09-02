@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq
+spec:
+  serviceName: rabbitmq
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3.11-management
+          ports:
+            - containerPort: 5672
+              name: amqp
+          volumeMounts:
+            - name: data-volume
+              mountPath: /data/rabbitmq
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - rabbitmq-diagnostics ping
+            initialDelaySeconds: 12
+            periodSeconds: 12
+            timeoutSeconds: 6
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc

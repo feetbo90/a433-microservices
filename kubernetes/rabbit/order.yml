@@ -41,4 +41,4 @@ spec:
           - name: PORT
             value: "3000"
           - name: AMQP_URL
-            value: "amqp://guest:guest@192.168.100.13:5672"
+            value: "amqp://rabbitmq-service.default.svc.cluster.local:5672"
